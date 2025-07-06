@@ -16,17 +16,20 @@ surf = pygame.Surface((100, 200))
 surf.fill('orange')
 x = 100
 
+# import an image
+player_surf = pygame.image.load('../images/player.png')
+
 while running:
     # event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    x += 1
+    x += 0.1
 
     # draw the game
-    display_surface.fill('blue')
-    display_surface.blit(surf, (x, 150))
+    display_surface.fill('darkgrey')
+    display_surface.blit(player_surf, (x, 150))
     pygame.display.update()
 
 pygame.quit()
