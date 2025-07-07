@@ -20,7 +20,7 @@ x = 100
 
 # import an image
 path = join('images', 'player.png')
-player_surf = pygame.image.load(path)
+player_surf = pygame.image.load(path).convert_alpha()
 
 while running:
     # event loop
