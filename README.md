@@ -2,7 +2,7 @@
 
 Made with pygame-ce
 
-Tutorial credit: (Clear Code Pygame Tutorial)[https://youtu.be/8OMghdHP-zs]
+Tutorial credit: [Clear Code Pygame Tutorial](https://youtu.be/8OMghdHP-zs)
 
 ## Running the code
 
