@@ -28,8 +28,15 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    x += 0.1
-
+    if x_forwards:
+        x += 1
+        if x >= WINDOW_WIDTH - player_surf.get_width():
+            x_forwards = False
+    else:
+        x -= 1
+        if x <= 0:
+            x_forwards = True
+            
     # draw the game
     display_surface.fill('darkgrey')
     display_surface.blit(player_surf, (x, 150))
