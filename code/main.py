@@ -41,10 +41,10 @@ while running:
 
     # draw the game
     display_surface.fill('darkgrey')
-    for i in range(20):
-        display_surface.blit(star_surf, star_positions[i])
     if player_rect.right < WINDOW_WIDTH:
         player_rect.left += 0.2
+    for pos in star_positions:
+        display_surface.blit(star_surf, pos)
 
     display_surface.blit(meteor_surf, meteor_rect)
     display_surface.blit(laser_surf, laser_rect)
