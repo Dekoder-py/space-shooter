@@ -17,7 +17,7 @@ surf.fill('orange')
 x = 100
 
 # import an image
-player_surf = pygame.image.load('../images/player.png')
+player_surf = pygame.image.load('images/player.png')
 
 while running:
     # event loop
