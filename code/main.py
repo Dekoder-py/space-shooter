@@ -1,6 +1,7 @@
 from os.path import join
 from random import randint
 
+# noinspection PyPackageRequirements
 import pygame
 
 # general setup
