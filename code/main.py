@@ -41,14 +41,15 @@ while running:
 
     # draw the game
     display_surface.fill('darkgrey')
-    if player_rect.right < WINDOW_WIDTH:
-        player_rect.left += 0.2
     for pos in star_positions:
         display_surface.blit(star_surf, pos)
 
     display_surface.blit(meteor_surf, meteor_rect)
     display_surface.blit(laser_surf, laser_rect)
 
+    # player movement
+    player_rect.x += 20
+    player_rect.y -= 10
     display_surface.blit(player_surf, player_rect)
     pygame.display.update()
 
