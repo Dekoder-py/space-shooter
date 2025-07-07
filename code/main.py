@@ -33,16 +33,6 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # movement / animation for player sprite
-    if x_forwards:
-        x += 1
-        if x >= WINDOW_WIDTH - player_surf.get_width():
-            x_forwards = False
-    else:
-        x -= 1
-        if x <= 0:
-            x_forwards = True
-
     # draw the game
     display_surface.fill('darkgrey')
     for i in range(20):
