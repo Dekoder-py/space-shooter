@@ -1,3 +1,5 @@
+from os.path import join
+
 import pygame
 
 # general setup
@@ -17,7 +19,8 @@ surf.fill('orange')
 x = 100
 
 # import an image
-player_surf = pygame.image.load('images/player.png')
+path = join('images', 'player.png')
+player_surf = pygame.image.load(path)
 
 while running:
     # event loop
