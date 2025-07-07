@@ -8,6 +8,7 @@ import pygame
 pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
 running = True
+clock = pygame.time.Clock()
 
 # create display surface
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -51,6 +52,11 @@ while running:
     player_rect.x += 20
     player_rect.y -= 10
     display_surface.blit(player_surf, player_rect)
+
+    # update the screen
     pygame.display.update()
+
+    # frame rate (60 fps)
+    clock.tick(10)
 
 pygame.quit()
