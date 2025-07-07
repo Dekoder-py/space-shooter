@@ -22,7 +22,7 @@ x = 100
 
 # import an image for the player
 player_surf = pygame.image.load(join('images', 'player.png')).convert_alpha()
-x_forwards = True
+player_rect = player_surf.get_frect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
 
 # import star
 star_surf = pygame.image.load(join('images', 'star.png')).convert_alpha()
@@ -38,7 +38,7 @@ while running:
     display_surface.fill('darkgrey')
     for i in range(20):
         display_surface.blit(star_surf, star_positions[i])
-    display_surface.blit(player_surf, (x, 150))
+    display_surface.blit(player_surf, player_rect)
     pygame.display.update()
 
 pygame.quit()
