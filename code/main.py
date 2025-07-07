@@ -21,6 +21,8 @@ pygame.display.set_caption('Space Shooter')
 # player
 player_surf = pygame.image.load(join('images', 'player.png')).convert_alpha()
 player_rect = player_surf.get_frect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
+player_direction = pygame.math.Vector2(2, -1)
+player_speed = 10
 
 # star
 star_surf = pygame.image.load(join('images', 'star.png')).convert_alpha()
@@ -49,8 +51,7 @@ while running:
     display_surface.blit(laser_surf, laser_rect)
 
     # player movement
-    player_rect.x += 20
-    player_rect.y -= 10
+    player_rect.center += player_direction * player_speed
     display_surface.blit(player_surf, player_rect)
 
     # update the screen
