@@ -4,6 +4,28 @@ from random import randint
 # noinspection PyPackageRequirements
 import pygame
 
+
+class Player(pygame.sprite.Sprite):
+    def __init__(self, *groups):
+        super().__init__(*groups)
+        self.image = pygame.image.load(join('images', 'player.png')).convert_alpha()
+        self.rect = self.image.get_frect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
+        self.direction = pygame.math.Vector2()
+        self.speed = 300
+
+    def update(self, dt):
+        # input
+        keys = pygame.key.get_pressed()
+        self.direction.x = int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
+        self.direction.y = int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
+
+        # normalise diagonal movement
+        self.direction = self.direction.normalize() if self.direction else self.direction
+
+        # update rect location
+        self.rect.center += self.direction * self.speed * dt
+
+
 # general setup
 pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
@@ -19,11 +41,10 @@ pygame.display.set_caption('Space Shooter')
 
 # imports
 
+all_sprites = pygame.sprite.Group()
+
 # player
-player_surf = pygame.image.load(join('images', 'player.png')).convert_alpha()
-player_rect = player_surf.get_frect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
-player_direction = pygame.math.Vector2()
-player_speed = 300
+player = Player(all_sprites)
 
 # star
 star_surf = pygame.image.load(join('images', 'star.png')).convert_alpha()
@@ -46,16 +67,10 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # input
-    keys = pygame.key.get_pressed()
-    player_direction.x = int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
-    player_direction.y = int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
+    if pygame.key.get_just_pressed()[pygame.K_SPACE]:
+        print("FIRE LASER!")
 
-    # normalise diagonal movement
-    player_direction = player_direction.normalize() if player_direction else player_direction
-
-    # update rect location
-    player_rect.center += player_direction * player_speed * dt
+    all_sprites.update(dt)
 
     # draw the game
     display_surface.fill('darkgrey')
@@ -65,7 +80,7 @@ while running:
     # draw the surfaces at the position of their rects
     display_surface.blit(meteor_surf, meteor_rect)
     display_surface.blit(laser_surf, laser_rect)
-    display_surface.blit(player_surf, player_rect)
+    all_sprites.draw(display_surface)
 
     # update the screen
     pygame.display.update()
