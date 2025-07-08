@@ -52,8 +52,7 @@ while running:
     player_direction.y = int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
 
     # normalise diagonal movement
-    if player_direction.x and player_direction.y:
-        player_direction = player_direction.normalize()
+    player_direction = player_direction.normalize() if player_direction else player_direction
 
     # update rect location
     player_rect.center += player_direction * player_speed * dt
