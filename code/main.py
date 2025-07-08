@@ -9,6 +9,7 @@ pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
 running = True
 clock = pygame.time.Clock()
+pygame.mouse.set_visible(False)
 
 # create display surface
 display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -21,7 +22,7 @@ pygame.display.set_caption('Space Shooter')
 # player
 player_surf = pygame.image.load(join('images', 'player.png')).convert_alpha()
 player_rect = player_surf.get_frect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
-player_direction = pygame.math.Vector2(1, 1)
+player_direction = pygame.math.Vector2()
 player_speed = 300
 
 # star
@@ -45,6 +46,18 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    # input
+    keys = pygame.key.get_pressed()
+    player_direction.x = int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
+    player_direction.y = int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
+
+    # normalise diagonal movement
+    if player_direction.x and player_direction.y:
+        player_direction = player_direction.normalize()
+
+    # update rect location
+    player_rect.center += player_direction * player_speed * dt
+
     # draw the game
     display_surface.fill('darkgrey')
     for pos in star_positions:
@@ -53,20 +66,6 @@ while running:
     display_surface.blit(meteor_surf, meteor_rect)
     display_surface.blit(laser_surf, laser_rect)
 
-    # player movement
-    if player_rect.bottom >= WINDOW_HEIGHT or player_rect.top <= 0:
-        if player_rect.bottom > WINDOW_HEIGHT:
-            player_rect.bottom = WINDOW_HEIGHT
-        elif player_rect.top < 0:
-            player_rect.top = 0
-        player_direction.y *= -1
-    if player_rect.right >= WINDOW_WIDTH or player_rect.left <= 0:
-        if player_rect.right > WINDOW_WIDTH:
-            player_rect.right = WINDOW_WIDTH
-        elif player_rect.left < 0:
-            player_rect.left = 0
-        player_direction.x *= -1
-    player_rect.center += player_direction * player_speed * dt
     display_surface.blit(player_surf, player_rect)
 
     # update the screen
