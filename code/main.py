@@ -62,9 +62,9 @@ while running:
     for pos in star_positions:
         display_surface.blit(star_surf, pos)
 
+    # draw the surfaces at the position of their rects
     display_surface.blit(meteor_surf, meteor_rect)
     display_surface.blit(laser_surf, laser_rect)
-
     display_surface.blit(player_surf, player_rect)
 
     # update the screen
