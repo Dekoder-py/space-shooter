@@ -53,6 +53,18 @@ class Star(pygame.sprite.Sprite):
         self.rect = self.image.get_frect(center=(randint(0, WINDOW_WIDTH), randint(0, WINDOW_HEIGHT)))
 
 
+class Laser(pygame.sprite.Sprite):
+    def __init__(self, surf, pos, *groups):
+        super().__init__(*groups)
+        self.image = surf
+        self.rect = self.image.get_frect(midbottom=pos)
+
+    def update(self, delta):
+        self.rect.centery -= 400 * delta
+        if self.rect.bottom < 0:
+            self.kill()
+
+
 # general setup
 pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
