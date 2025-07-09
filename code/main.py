@@ -93,29 +93,22 @@ display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption('Space Shooter')
 
 # imports
-
-all_sprites = pygame.sprite.Group()
-
-# star
 star_surf = pygame.image.load(join('images', 'star.png')).convert_alpha()
+meteor_surf = pygame.image.load(join('images', 'meteor.png')).convert_alpha()
+laser_surf = pygame.image.load(join('images', 'laser.png')).convert_alpha()
+
+# sprites
+all_sprites = pygame.sprite.Group()
 for i in range(20):
     Star(star_surf, all_sprites)
-
-# player
 player = Player(all_sprites)
 
-# meteor
-meteor_surf = pygame.image.load(join('images', 'meteor.png')).convert_alpha()
-meteor_rect = meteor_surf.get_frect(center=(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2))
-
-# laser
-laser_surf = pygame.image.load(join('images', 'laser.png')).convert_alpha()
-laser_rect = laser_surf.get_frect(bottomleft=(20, WINDOW_HEIGHT - 20))
+# custom events -> meteor event
+meteor_event = pygame.event.custom_type()
+pygame.time.set_timer(meteor_event, 500)
 
 while running:
-    # delta time
     dt = clock.tick() / 1000
-
     # event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
