@@ -2,6 +2,7 @@ from os.path import join
 from random import randint, uniform
 
 # noinspection PyPackageRequirements
+# hide requirement warning for pycharm (pygame-ce vs pygame)
 import pygame
 
 
