@@ -13,7 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.speed = 300
 
-    def update(self, dt):
+    def update(self, delta):
         # input
         keys = pygame.key.get_pressed()
         self.direction.x = int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
@@ -23,7 +23,11 @@ class Player(pygame.sprite.Sprite):
         self.direction = self.direction.normalize() if self.direction else self.direction
 
         # update rect location
-        self.rect.center += self.direction * self.speed * dt
+        self.rect.center += self.direction * self.speed * delta
+
+        recent_keys = pygame.key.get_just_pressed()
+        if recent_keys[pygame.K_SPACE]:
+            print("FIRE LASER!")
 
 
 # general setup
@@ -66,9 +70,6 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-    if pygame.key.get_just_pressed()[pygame.K_SPACE]:
-        print("FIRE LASER!")
 
     all_sprites.update(dt)
 
