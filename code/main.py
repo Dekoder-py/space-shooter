@@ -13,6 +13,17 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2()
         self.speed = 300
 
+        # cooldown (laser)
+        self.can_shoot = True
+        self.laser_shoot_time = 0
+        self.cooldown_duration = 400
+
+    def laser_timer(self):
+        if not self.can_shoot:
+            current_time = pygame.time.get_ticks()
+            if current_time - self.laser_shoot_time >= self.cooldown_duration:
+                self.can_shoot = True
+
     def update(self, delta):
         # input
         keys = pygame.key.get_pressed()
