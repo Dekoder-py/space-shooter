@@ -39,6 +39,10 @@ class Player(pygame.sprite.Sprite):
         recent_keys = pygame.key.get_just_pressed()
         if recent_keys[pygame.K_SPACE]:
             print("FIRE LASER!")
+            self.can_shoot = False
+            self.laser_shoot_time = pygame.time.get_ticks()
+
+        self.laser_timer()
 
 
 class Star(pygame.sprite.Sprite):
