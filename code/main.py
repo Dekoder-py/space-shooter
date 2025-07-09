@@ -1,5 +1,5 @@
 from os.path import join
-from random import randint
+from random import randint, uniform
 
 # noinspection PyPackageRequirements
 import pygame
