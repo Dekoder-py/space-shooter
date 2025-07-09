@@ -36,6 +36,7 @@ class Player(pygame.sprite.Sprite):
         # update rect location
         self.rect.center += self.direction * self.speed * delta
 
+        # laser
         recent_keys = pygame.key.get_just_pressed()
         if recent_keys[pygame.K_SPACE]:
             print("FIRE LASER!")
