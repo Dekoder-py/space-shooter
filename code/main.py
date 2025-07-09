@@ -65,6 +65,20 @@ class Laser(pygame.sprite.Sprite):
             self.kill()
 
 
+class Meteor(pygame.sprite.Sprite):
+    def __init__(self, surf, pos, *groups):
+        super().__init__(*groups)
+        self.image = surf
+        self.rect = self.image.get_frect(center=pos)
+        self.direction = pygame.Vector2(uniform(-0.5, 0.5), 1)
+        self.speed = randint(400, 500)
+
+    def update(self, *args, **kwargs):
+        self.rect.center += self.direction * self.speed * dt
+        if self.rect.top > WINDOW_HEIGHT:
+            self.kill()
+
+
 # general setup
 pygame.init()
 WINDOW_WIDTH, WINDOW_HEIGHT = 1280, 720
