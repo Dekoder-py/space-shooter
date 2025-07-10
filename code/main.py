@@ -28,8 +28,13 @@ class Player(pygame.sprite.Sprite):
     def update(self, delta):
         # input
         keys = pygame.key.get_pressed()
-        self.direction.x = int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
-        self.direction.y = int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
+        left_keys_pressed = keys[pygame.K_LEFT] or keys[pygame.K_a]
+        down_keys_pressed = keys[pygame.K_DOWN] or keys[pygame.K_s]
+        up_keys_pressed = keys[pygame.K_UP] or keys[pygame.K_w]
+        right_keys_pressed = keys[pygame.K_RIGHT] or keys[pygame.K_d]
+
+        self.direction.x = int(right_keys_pressed) - int(left_keys_pressed)
+        self.direction.y = int(down_keys_pressed) - int(up_keys_pressed)
 
         # normalise diagonal movement
         self.direction = self.direction.normalize() if self.direction else self.direction
