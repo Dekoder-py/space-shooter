@@ -12,3 +12,12 @@ cd space-shooter
 pip install -r requirements.txt
 python3 ./code/main.py
 ```
+
+## How to play
+
+### Controls:
+
+- Forward: W or Up Arrow
+- Back: S or Down Arrow
+- Left: A or Left Arrow
+- Right: D or Right Arrow
